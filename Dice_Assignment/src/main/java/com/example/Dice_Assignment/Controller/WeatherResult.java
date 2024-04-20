@@ -17,11 +17,13 @@ public class WeatherResult {
         this.weatherAPIimpl = weatherAPIimpl;
     }
 
+    // End Point for (RapidApiGetForecastSummaryByLocationName)
     @GetMapping("/{name}")
     public ResponseEntity<?> getSummaryByLocation(@PathVariable("name") String name){
         return ResponseEntity.ok(weatherAPIimpl.RapidApiGetForecastSummaryByLocationName(name));
     }
 
+    // End point for (RapidApiGetHourlyForecastByLocationName)
     @GetMapping("/hourly/{name}")
     public ResponseEntity<?> getHourlyReportByLocation(@PathVariable("name") String name){
         return ResponseEntity.ok(weatherAPIimpl.RapidApiGetHourlyForecastByLocationName(name));
