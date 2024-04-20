@@ -1,0 +1,14 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 123b540a0c3a1b7d6cbf
+            client-secret: 1b4b8952d878ba2e3f058b7d67b14776386bb006
+            scope: read:user
+weather:
+  Url: https://forecast9.p.rapidapi.com/rapidapi/forecast/{name}/summary/
+  HourlyURL : https://forecast9.p.rapidapi.com/rapidapi/forecast/{name}/hourly/
+  Key : deea8d4df0mshd8201ecab990186p1674bajsne540cf3e4378
+  host : forecast9.p.rapidapi.com
