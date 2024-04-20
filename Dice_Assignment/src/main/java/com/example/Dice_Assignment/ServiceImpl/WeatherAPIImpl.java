@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -46,6 +48,10 @@ public class WeatherAPIImpl implements WeatherAPI {
             logger.info("Output from API is {} ",response);
             return response;
         }
+        catch (HttpClientErrorException | HttpServerErrorException ex) {
+            logger.error("The message is {}",ex.getMessage());
+            throw new ResponseStatusException(ex.getStatusCode(),ex.getMessage());
+        }
         catch (Exception e){
             logger.error("Something went wrong while getting respnse from Weather API");
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Error when calling the end point");
@@ -65,7 +71,10 @@ public class WeatherAPIImpl implements WeatherAPI {
             logger.info("Output from API is {} ",response);
             return response;
         }
-        catch (Exception e){
+        catch (HttpClientErrorException | HttpServerErrorException ex) {
+            logger.error("The message is {}",ex.getMessage());
+            throw new ResponseStatusException(ex.getStatusCode(),ex.getMessage());
+        } catch (Exception e){
             logger.error("Something went wrong while getting respnse from Weather API");
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Error when calling the end point");
         }
